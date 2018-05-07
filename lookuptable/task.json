@@ -1,0 +1,9 @@
+{
+    "id": "FLOWS/gsheets/lookuptable",
+    "lambda": "lambda-arn",
+    "role": "iam-arn",
+    "type": "task",
+    "description": "uses a google sheet as lookup table for key/values operations",
+    "icon": "https://flows.app/favicon.png",
+    "billing": "standard"
+}

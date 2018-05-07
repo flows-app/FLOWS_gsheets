@@ -1,0 +1,9 @@
+{
+    "id": "FLOWS/gsheets/modifiedrow",
+    "lambda": "lambda-arn",
+    "role": "iam-arn",
+    "type": "poller",
+    "description": "trigggers whenever a row wihin a google sheet was modified",
+    "icon": "https://flows.app/favicon.png",
+    "billing": "standard"
+}

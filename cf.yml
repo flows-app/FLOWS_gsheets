@@ -1,41 +1,41 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: "meshify gsheets"
+Description: "flows gsheets"
 Resources:
-  MESHIFYgsheetsmodifiedrowFunction:
+  modifiedrowFunction:
     Type: AWS::Lambda::Function
     Properties:
-      Code: MESHIFY_gsheets_modifiedrow
+      Code: modifiedrow
       Handler: main.handler
       Role:
         Fn::GetAtt: [ LambdaRole , Arn ]
       Runtime: python3.6
       Timeout: 300
-  MESHIFYgsheetslookuptableFunction:
+  lookuptableFunction:
     Type: AWS::Lambda::Function
     Properties:
-      Code: MESHIFY_gsheets_lookuptable
+      Code: lookuptable
       Handler: main.handler
       Role:
         Fn::GetAtt: [ LambdaRole , Arn ]
       Runtime: python3.6
       Timeout: 300
-  MESHIFYgsheetsmodifiedrowLogGroup:
+  modifiedrowLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName:
         Fn::Join:
           - ""
           - - "/aws/lambda/"
-            - Ref: MESHIFYgsheetsmodifiedrowFunction
+            - Ref: modifiedrowFunction
       RetentionInDays: 7
-  MESHIFYgsheetslookuptableLogGroup:
+  lookuptableLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName:
         Fn::Join:
           - ""
           - - "/aws/lambda/"
-            - Ref: MESHIFYgsheetslookuptableFunction
+            - Ref: lookuptableFunction
       RetentionInDays: 7
   LambdaRole:
     Type: AWS::IAM::Role
@@ -84,22 +84,22 @@ Resources:
               Action:
               - lambda:InvokeFunction
               Resource:
-              - Fn::GetAtt: [ MESHIFYgsheetsmodifiedrowFunction , Arn ]
-              - Fn::GetAtt: [ MESHIFYgsheetslookuptableFunction , Arn ]
+              - Fn::GetAtt: [ modifiedrowFunction , Arn ]
+              - Fn::GetAtt: [ lookuptableFunction , Arn ]
 Outputs:
-  MESHIFYgsheetsmodifiedrowFunction:
-    Description: '/MESHIFY/MESHIFY/gsheets/modifiedrow/lambda'
+  modifiedrowFunction:
+    Description: 'modifiedrow'
     Value:
-      Fn::GetAtt: [ MESHIFYgsheetsmodifiedrowFunction , Arn ]
-  MESHIFYgsheetsmodifiedrowRole:
-    Description: '/MESHIFY/MESHIFY/gsheets/modifiedrow/role'
+      Fn::GetAtt: [ modifiedrowFunction , Arn ]
+  modifiedrowRole:
+    Description: 'modifiedrow'
     Value:
       Fn::GetAtt: [ InvokeRole , Arn ]
-  MESHIFYgsheetslookuptableFunction:
-    Description: '/MESHIFY/MESHIFY/gsheets/lookuptable/lambda'
+  lookuptableFunction:
+    Description: 'lookuptable'
     Value:
-      Fn::GetAtt: [ MESHIFYgsheetsmodifiedrowFunction , Arn ]
-  MESHIFYgsheetslookuptableRole:
-    Description: '/MESHIFY/MESHIFY/gsheets/lookuptable/role'
+      Fn::GetAtt: [ modifiedrowFunction , Arn ]
+  lookuptableRole:
+    Description: 'lookuptable'
     Value:
       Fn::GetAtt: [ InvokeRole , Arn ]
